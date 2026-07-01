@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Football Jerseys</title>
+    <style>
+        /* --- GENERAL STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background-color: #f4f4f9; color: #333; transition: background-color 0.3s, color 0.3s; }
+        
+        /* --- SPLASH SCREEN --- */
+        #splash-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a1a; z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease; }
+        .splash-spinner { font-size: 5rem; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .splash-title { color: #00ff88; font-size: 2.5rem; font-weight: bold; letter-spacing: 2px; }
+
+        /* --- HEADER & CURRENCY --- */
+        header { background-color: #1a1a1a; color: white; text-align: center; padding: 3rem 1rem 2rem 1rem; position: relative; transition: 0.3s; }
+        .header-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 15px; align-items: center; }
+        #currency-selector { background: #333; color: white; border: 1px solid #555; padding: 5px 10px; border-radius: 5px; font-weight: bold; cursor: pointer; outline: none; }
+        .theme-toggle { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: white; }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; color: #00ff88; }
+        
+        /* --- CONTROLS & GRID --- */
+        .controls-section { max-width: 1200px; margin: 20px auto; padding: 0 20px; text-align: center; }
+        #search-bar { width: 100%; max-width: 400px; padding: 12px 20px; font-size: 1rem; border: 2px solid #ccc; border-radius: 25px; margin-bottom: 20px; transition: 0.3s; }
+        .filter-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .filter-btn { background-color: #e0e0e0; color: #333; padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        .filter-btn.active { background-color: #1a1a1a; color: #00ff88; }
+        .jersey-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; max-width: 1200px; margin: 0 auto; }
+        
+        /* --- CARDS & LOW STOCK --- */
+        .jersey-card { background-color: white; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; transition: 0.3s; }
+        .jersey-card img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; background-color: #ccc; }
+        .jersey-card h2 { font-size: 1.2rem; margin-bottom: 5px; }
+        .price { font-size: 1.4rem; color: #e63946; font-weight: bold; margin-bottom: 5px; }
+        .old-price { text-decoration: line-through; color: #999; font-size: 1rem; margin-right: 8px; }
+        .sale-badge { position: absolute; top: 15px; right: 15px; background-color: #ff0000; color: white; padding: 5px 10px; font-size: 0.9rem; font-weight: bold; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+        .low-stock { color: #e63946; font-size: 0.85rem; font-weight: bold; margin-bottom: 10px; animation: pulse 1.5s infinite; }
+        .selling-fast { color: #ff9800; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        /* --- INPUTS & SIZE GUIDE --- */
+        .size-guide-link { display: block; text-align: right; font-size: 0.85rem; color: #007bff; cursor: pointer; margin-top: -5px; margin-bottom: 10px; text-decoration: underline; }
+        .size-selector, .custom-name-input { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; background-color: #f9f9f9; transition: 0.3s; }
+        .custom-name-input { margin-bottom: 15px; }
+        .action-buttons { display: flex; gap: 10px; }
+        .add-to-cart-btn, .whatsapp-btn { flex: 1; padding: 12px 5px; font-size: 1rem; font-weight: bold; border-radius: 5px; cursor: pointer; border: none; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 5px; }
+        .add-to-cart-btn { background-color: #1a1a1a; color: #00ff88; }
+        .add-to-cart-btn:hover { background-color: #333; }
+        .whatsapp-btn { background-color: #25D366; color: white; }
+        .whatsapp-btn:hover { background-color: #128C7E; }
+
+        /* --- MODALS (CART & SIZE GUIDE) --- */
+        .cart-btn-floating { position: fixed; bottom: 20px; right: 20px; background-color: #00ff88; color: #1a1a1a; border: none; border-radius: 50%; width: 65px; height: 65px; font-size: 1.8rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; justify-content: center; align-items: center; transition: transform 0.2s; }
+        .cart-btn-floating:active { transform: scale(0.9); }
+        .cart-count { position: absolute; top: -2px; right: -2px; background-color: #ff0000; color: white; font-size: 0.9rem; font-weight: bold; padding: 4px 8px; border-radius: 50%; }
+        .cart-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); z-index: 1001; justify-content: center; align-items: center; }
+        .cart-content { background-color: white; width: 90%; max-width: 500px; border-radius: 10px; padding: 25px; max-height: 80vh; overflow-y: auto; position: relative; transition: 0.3s; }
+        .close-cart { position: absolute; top: 15px; right: 15px; font-size: 1.8rem; cursor: pointer; background: none; border: none; color: #333; transition: 0.3s; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 15px 0; transition: 0.3s; }
+        .cart-item-details { flex: 1; }
+        .cart-item-title { font-weight: bold; margin-bottom: 5px; }
+        .cart-item-price { color: #e63946; font-weight: bold; }
+        .remove-btn { color: red; background: none; border: none; font-size: 1.2rem; cursor: pointer; margin-left: 15px; }
+        .cart-total { font-size: 1.4rem; font-weight: bold; text-align: right; margin-top: 20px; border-top: 2px solid #333; padding-top: 15px; transition: 0.3s; }
+        .checkout-btn { background-color: #25D366; color: white; border: none; padding: 15px; width: 100%; font-size: 1.2rem; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px; display: flex; justify-content: center; gap: 10px; }
+        .checkout-btn:hover { background-color: #128C7E; }
+        .promo-container { display: flex; gap: 10px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px; }
+        .promo-input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; }
+        .promo-btn { background: #1a1a1a; color: #00ff88; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .discount-applied { color: #25D366; font-size: 0.95rem; margin-top: 8px; display: none; font-weight: bold; }
+        .original-price { text-decoration: line-through; color: #999; font-size: 1rem; margin-right: 10px; }
+        
+        /* Size Table */
+        .size-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .size-table th, .size-table td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        .size-table th { background-color: #f4f4f9; color: #333; }
+
+        /* --- TOAST NOTIFICATIONS --- */
+        #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+        .toast { background-color: #1a1a1a; color: #00ff88; padding: 15px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transform: translateX(120%); animation: slideIn 0.3s forwards, fadeOut 0.3s 2.7s forwards; font-weight: bold; border-left: 5px solid #00ff88; }
+        @keyframes slideIn { to { transform: translateX(0); } }
+        @keyframes fadeOut { to { opacity: 0; transform: translateX(120%); } }
+
+        /* --- REVIEWS & FAQ --- */
+        .reviews-section { max-width: 1200px; margin: 40px auto; padding: 0 20px; text-align: center; }
+        .reviews-section h2 { font-size: 2rem; margin-bottom: 20px; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .review-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); text-align: left; transition: 0.3s; }
+        .stars { color: #FFD700; font-size: 1.2rem; margin-bottom: 10px; }
+        .review-text { font-style: italic; color: #555; margin-bottom: 10px; line-height: 1.4; }
+        .reviewer { font-weight: bold; color: #1a1a1a; }
+        .faq-section { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .faq-section h2 { text-align: center; font-size: 2rem; margin-bottom: 20px; }
+        .faq-item { background: white; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden; transition: 0.3s; }
+        .faq-question { width: 100%; text-align: left; padding: 15px 20px; font-size: 1.1rem; font-weight: bold; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #333; transition: 0.3s; }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease; color: #666; line-height: 1.5; }
+        .faq-item.active .faq-answer { padding: 0 20px 15px 20px; max-height: 200px; }
+        .faq-item.active .faq-question { color: #00ff88; background-color: #1a1a1a; }
+
+        /* --- FEATURES & FOOTER --- */
+        .features-section { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1200px; margin: 40px auto; padding: 0 20px; text-align: center; }
+        .feature-box { background-color: white; padding: 25px 20px; border-radius: 10px; flex: 1; min-width: 250px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); transition: 0.3s; }
+        .feature-icon { font-size: 2.5rem; margin-bottom: 15px; display: inline-block; }
+        .feature-box h3 { font-size: 1.2rem; margin-bottom: 10px; color: #1a1a1a; transition: 0.3s; }
+        .feature-box p { color: #666; font-size: 0.95rem; line-height: 1.4; transition: 0.3s; }
+        footer { background-color: #1a1a1a; color: white; text-align: center; padding: 40px 20px 20px 20px; margin-top: 40px; transition: 0.3s; }
+        .footer-content h3 { color: #00ff88; font-size: 1.8rem; margin
+        -bottom: 10px; }
+        .footer-content p { margin-bottom: 20px; color: #ccc; }
+        .social-links { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+        .social-links a { background-color: #333; color: white; text-decoration: none; padding: 10px 20px; border-radius: 25px; font-weight: bold; transition: background 0.3s; }
+        .social-links a:hover { background-color: #00ff88; color: #1a1a1a; }
+        .copyright { font-size: 0.9rem; border-top: 1px solid #333; padding-top: 20px; }
+
+        /* --- DARK MODE STYLES --- */
+        body.dark-mode { background-color: #121212; color: #f4f4f9; }
+        body.dark-mode header, body.dark-mode footer { background-color: #000; }
+        body.dark-mode .jersey-card, body.dark-mode .feature-box, body.dark-mode .cart-content, body.dark-mode .review-card, body.dark-mode .faq-item { background-color: #1e1e1e; color: #f4f4f9; box-shadow: 0 4px 8px rgba(255,255,255,0.05); }
+        body.dark-mode .filter-btn { background-color: #333; color: #f4f4f9; }
+        body.dark-mode .filter-btn.active { background-color: #00ff88; color: #1a1a1a; }
+        body.dark-mode #search-bar, body.dark-mode .size-selector, body.dark-mode .custom-name-input, body.dark-mode .promo-input { background-color: #333; color: #f4f4f9; border-color: #555; }
+        body.dark-mode .close-cart { color: #f4f4f9; }
+        body.dark-mode .cart-item, body.dark-mode .promo-container { border-color: #444; }
+        body.dark-mode .cart-total { border-top-color: #555; }
+        body.dark-mode .feature-box h3, body.dark-mode .reviewer { color: #00ff88; }
+        body.dark-mode .feature-box p, body.dark-mode .review-text, body.dark-mode .faq-answer { color: #aaa; }
+        body.dark-mode .faq-question { color: #f4f4f9; }
+        body.dark-mode .size-table th { background-color: #333; color: #00ff88; border-color: #555; }
+        body.dark-mode .size-table td { border-color: #555; }
+
+        /* --- ANIMATION STYLES --- */
+        @keyframes popIn { 0% { opacity: 0; transform: scale(0.8) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+        .animate-in { animation: popIn 0.4s ease-out forwards; }
+    </style>
+</head>
+<body>
+
+    <!-- SPLASH SCREEN -->
+    <div id="splash-screen">
+        <div class="splash">NWAYOBUIJE ⚽</div>
+        <div class="splash-title">KICKOFF JERSEYS</div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container"></div>
+
+    <header>
+        <div class="header-controls">
+            <select id="currency-selector">
+                <option value="NGN">₦ NGN</option>
+                <option value="USD">$ USD</option>
+                <option value="GBP">£ GBP</option>
+            </select>
+            <button class="theme-toggle" id="theme-toggle">🌙</button>
+        </div>
+        <h1>NWAYOBUIJE KickOff Jerseys</h1>
+        <p>The best quality football kits at the best prices!</p>
+    </header>
+
+    <main>
+        <div class="controls-section">
+            <input type="text" id="search-bar" placeholder="Search for a jersey...">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="la-liga">La Liga</button>
+                <button class="filter-btn" data-category="premier-league">Premier League</button>
+                <button class="filter-btn" data-category="mls">MLS</button>
+                <button class="filter-btn" data-category="saudi-league">Saudi League</button>
+                <button class="filter-btn" data-category="serie-a">Serie A</button>
+                <button class="filter-btn" data-category="bundesliga">Bundesliga</button>
+                <button class="filter-btn" data-category="ligue-1">Ligue 1</button>
+            </div>
+        </div>
+
+        <div class="jersey-grid">
+            <!-- Real Madrid -->
+            <div class="jersey-card" data-category="la-liga"><img src="https://i.postimg.cc/G2XP9sM6/Screenshot-20260701-152727-2.jpg" alt="Real Madrid"><h2>Real Madrid Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><p class="low-stock">⏳ Only 2 left in stock!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Real Madrid Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Real Madrid Home 26/27" data-price="25000">💬 Buy</button></div></div>
+            
+            <!-- Arsenal -->
+            <div class="jersey-card" data-category="premier-league"><div class="sale-badge">SALE 🔥</div><img src="https://i.postimg.cc/5N39ZqRF/Screenshot-20260701-121110-2.jpg" alt="Arsenal"><h2>Arsenal Home 26/27</h2><p class="price" data-base-price="22000"><span class="old-price" data-base-old="28000">₦28,000</span> ₦22,000</p><p class="low-stock selling-fast">🔥 Selling Fast!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Arsenal Home 26/27 (SALE)" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Arsenal Home 26/27 (SALE)" data-price="22000">💬 Buy</button></div></div>
+            
+            <!-- Liverpool -->
+            <div class="jersey-card" data-category="premier-league"><img src="https://i.postimg.cc/GmcyTxNP/Screenshot-20260701-160052-2.jpg" alt="Liverpool"><h2>Liverpool Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Liverpool Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Liverpool Home 26/27" data-price="22000">💬 Buy</button></div></div>
+            
+            <!-- Inter Miami -->
+            <div class="jersey-card" data-category="mls"><img src="https://i.postimg.cc/pXxXG1qf/Screenshot-20260701-121207-2.jpg" alt="Inter Miami"><h2>Inter Miami - Messi #10</h2><p class="price" data-base-price="25000">₦25,000</p><p class="low-stock">⏳ Only 1 left!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Inter Miami - Messi #10" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Inter Miami - Messi #10" data-price="25000">💬 Buy</button></div></div>
+            
+            <!-- Man Utd -->
+            <div class="jersey-card" data-category="premier-league"><img src="https://i.postimg.cc/Nf4GW7zK/Screenshot-20260701-134913-2.jpg" alt="Man Utd"><h2>Man United Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Man United Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Man United Home 26/27" data-price="22000">💬 Buy</button></div></div>
+                        <!-- Chelsea -->
+            <div class="jersey-card" data-category="premier-league"><img src="https://i.postimg.cc/Pr4fBzRp/Screenshot-20260701-135027-2.jpg" alt="Chelsea"><h2>Chelsea Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"
