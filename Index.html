@@ -12,15 +12,6 @@
         /* --- HEADER & CURRENCY --- */
         header { background-color: #1a1a1a; color: white; text-align: center; padding: 3rem 1rem 2rem 1rem; position: relative; transition: 0.3s; }
         .header-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 15px; align-items: center; }
-        
-        /* Wishlist Header Button */
-               /* Floating Wishlist Button */
-        .wishlist-btn-floating { position: fixed; bottom: 100px; right: 20px; background-color: white; border: none; border-radius: 50%; width: 65px; height: 65px; font-size: 1.8rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; justify-content: center; align-items: center; transition: transform 0.2s; }
-        .wishlist-btn-floating:active { transform: scale(0.9); }
-        .wishlist-count-floating { position: absolute; top: -2px; right: -2px; background-color: #ff0000; color: white; font-size: 0.9rem; font-weight: bold; padding: 4px 8px; border-radius: 50%; }
-        body.dark-mode .wishlist-btn-floating { background-color: #333; }
-        
-        
         #currency-selector { background: #333; color: white; border: 1px solid #555; padding: 5px 10px; border-radius: 5px; font-weight: bold; cursor: pointer; outline: none; }
         .theme-toggle { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: white; }
         header h1 { font-size: 2.5rem; margin-bottom: 10px; color: #00ff88; }
@@ -49,12 +40,10 @@
         .jersey-card h2 { font-size: 1.2rem; margin-bottom: 5px; }
         .price { font-size: 1.4rem; color: #e63946; font-weight: bold; margin-bottom: 5px; }
         .old-price { text-decoration: line-through; color: #999; font-size: 1rem; margin-right: 8px; }
-        .sale-badge { position: absolute; top: 15px; left: 15px; background-color: #ff0000; color: white; padding: 5px 10px; font-size: 0.9rem; font-weight: bold; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
         
-/* Wishlist Heart Button */
-.wishlist-btn { position: absolute; top: 15px; right: 15px; background: white; border: none; border-radius: 50%; width: 35px; height: 35px; font-size: 1.4rem; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; transition: 0.3s; z-index: 10; color: #ccc; }
-
-
+        /* Swapped Sale Badge (Left) and Wishlist Heart (Right) */
+        .sale-badge { position: absolute; top: 15px; left: 15px; background-color: #ff0000; color: white; padding: 5px 10px; font-size: 0.9rem; font-weight: bold; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); z-index: 10; }
+        .wishlist-btn { position: absolute; top: 15px; right: 15px; background: white; border: none; border-radius: 50%; width: 35px; height: 35px; font-size: 1.4rem; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; transition: 0.3s; z-index: 10; color: #ccc; }
         .wishlist-btn.active { color: #ff0000; }
         .wishlist-btn:hover { transform: scale(1.1); }
         
@@ -73,10 +62,16 @@
         .whatsapp-btn { background-color: #25D366; color: white; }
         .whatsapp-btn:hover { background-color: #128C7E; }
 
-        /* --- MODALS (CART, WISHLIST & SIZE GUIDE) --- */
+        /* --- MODALS & FLOATING BUTTONS --- */
         .cart-btn-floating { position: fixed; bottom: 20px; right: 20px; background-color: #00ff88; color: #1a1a1a; border: none; border-radius: 50%; width: 65px; height: 65px; font-size: 1.8rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; justify-content: center; align-items: center; transition: transform 0.2s; }
         .cart-btn-floating:active { transform: scale(0.9); }
         .cart-count { position: absolute; top: -2px; right: -2px; background-color: #ff0000; color: white; font-size: 0.9rem; font-weight: bold; padding: 4px 8px; border-radius: 50%; }
+        
+        /* Floating Wishlist Button */
+        .wishlist-btn-floating { position: fixed; bottom: 100px; right: 20px; background-color: white; border: none; border-radius: 50%; width: 65px; height: 65px; font-size: 1.8rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; justify-content: center; align-items: center; transition: transform 0.2s; }
+        .wishlist-btn-floating:active { transform: scale(0.9); }
+        .wishlist-count-floating { position: absolute; top: -2px; right: -2px; background-color: #ff0000; color: white; font-size: 0.9rem; font-weight: bold; padding: 4px 8px; border-radius: 50%; }
+
         .cart-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); z-index: 1001; justify-content: center; align-items: center; }
         .cart-content { background-color: white; width: 90%; max-width: 500px; border-radius: 10px; padding: 25px; max-height: 80vh; overflow-y: auto; position: relative; transition: 0.3s; }
         .close-cart { position: absolute; top: 15px; right: 15px; font-size: 1.8rem; cursor: pointer; background: none; border: none; color: #333; transition: 0.3s; }
@@ -102,8 +97,7 @@
         /* --- TOAST NOTIFICATIONS --- */
         #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
         .toast { background-color: #1a1a1a; color: #00ff88; padding: 15px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transform: translateX(120%); animation: slideIn 0.3s forwards, fadeOut 0.3s 2.7s forwards; font-weight: bold; border-left: 5px solid #00ff88; }
-        @keyframes slideIn { to { transform: translateX(0); } }
-        @keyframes fadeOut { to { opacity: 0; transform: translateX(120%); } }
+        @keyframes slideIn { to { transform: translateX(0); } }  @keyframes fadeOut { to { opacity: 0; transform: translateX(120%); } }
 
         /* --- REVIEWS & FAQ --- */
         .reviews-section { max-width: 1200px; margin: 40px auto; padding: 0 20px; text-align: center; }
@@ -113,7 +107,8 @@
         .stars { color: #FFD700; font-size: 1.2rem; margin-bottom: 10px; }
         .review-text { font-style: italic; color: #555; margin-bottom: 10px; line-height: 1.4; }
         .reviewer { font-weight: bold; color: #1a1a1a; }
-        .faq-section { max-width: 800px; margin: 40px auto; padding: 0 20px; } .faq-section h2 { text-align: center; font-size: 2rem; margin-bottom: 20px; }
+        .faq-section { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .faq-section h2 { text-align: center; font-size: 2rem; margin-bottom: 20px; }
         .faq-item { background: white; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden; transition: 0.3s; }
         .faq-question { width: 100%; text-align: left; padding: 15px 20px; font-size: 1.1rem; font-weight: bold; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #333; transition: 0.3s; }
         .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease; color: #666; line-height: 1.5; }
@@ -152,6 +147,7 @@
         body.dark-mode .size-table td { border-color: #555; }
         body.dark-mode .wishlist-btn { background-color: #333; color: #555; }
         body.dark-mode .wishlist-btn.active { color: #ff0000; }
+        body.dark-mode .wishlist-btn-floating { background-color: #333; }
 
         /* --- ANIMATION STYLES --- */
         @keyframes popIn { 0% { opacity: 0; transform: scale(0.8) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
@@ -160,12 +156,10 @@
 </head>
 <body>
 
-    <!-- TOAST NOTIFICATION CONTAINER -->
     <div id="toast-container"></div>
 
     <header>
         <div class="header-controls">
-       
             <select id="currency-selector">
                 <option value="NGN">₦ NGN</option>
                 <option value="USD">$ USD</option>
@@ -173,7 +167,7 @@
             </select>
             <button class="theme-toggle" id="theme-toggle">🌙</button>
         </div>
-        <h1>EKENE KickOff Jerseys</h1>
+        <h1>KickOff Jerseys</h1>
         <p>The best quality football kits at the best prices!</p>
     </header>
 
@@ -202,65 +196,26 @@
             </div>
         </div>
 
-        <div class="jersey-grid" id="jersey-grid">
-            <!-- Real Madrid -->
-            <div class="jersey-card" data-category="la-liga"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/2ymPCkd2/Screenshot-20260702-152103-2.jpg" alt="Real Madrid"><h2>Real Madrid Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><p class="low-stock">⏳ Only 2 left in stock!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Real Madrid Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Real Madrid Home 26/27" data-price="25000">💬 Buy</button></div></div>
-            
-            <!-- Arsenal -->
+        <div class="jersey-grid" id="jersey-grid"><div class="jersey-card" data-category="la-liga"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/2ymPCkd2/Screenshot-20260702-152103-2.jpg" alt="Real Madrid"><h2>Real Madrid Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><p class="low-stock">⏳ Only 2 left in stock!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Real Madrid Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Real Madrid Home 26/27" data-price="25000">💬 Buy</button></div></div>
             <div class="jersey-card" data-category="premier-league"><button class="wishlist-btn" title="Add to Wishlist">♥</button><div class="sale-badge">SALE 🔥</div><img src="https://i.postimg.cc/0jfhQTcR/Screenshot-20260702-140916-2.jpg" alt="Arsenal"><h2>Arsenal Home 26/27</h2><p class="price" data-base-price="22000"><span class="old-price" data-base-old="28000">₦28,000</span> ₦22,000</p><p class="low-stock selling-fast">🔥 Selling Fast!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Arsenal Home 26/27 (SALE)" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Arsenal Home 26/27 (SALE)" data-price="22000">💬 Buy</button></div></div>
-            
-            <!-- Liverpool -->
-            <div class="jersey-card" data-category="premier-league
-            "><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/1XPLymcS/Screenshot-20260702-143434-2.jpg" alt="Liverpool"><h2>Liverpool Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Liverpool Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Liverpool Home 26/27" data-price="22000">💬 Buy</button></div></div>
-            
-            <!-- Inter Miami -->
+            <div class="jersey-card" data-category="premier-league"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/1XPLymcS/Screenshot-20260702-143434-2.jpg" alt="Liverpool"><h2>Liverpool Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size
+            : L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Liverpool Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Liverpool Home 26/27" data-price="22000">💬 Buy</button></div></div>
             <div class="jersey-card" data-category="mls"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/GtrZbLJ0/Screenshot-20260702-145227-2.jpg" alt="Inter Miami"><h2>Inter Miami - Messi #10</h2><p class="price" data-base-price="25000">₦25,000</p><p class="low-stock">⏳ Only 1 left!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Inter Miami - Messi #10" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Inter Miami - Messi #10" data-price="25000">💬 Buy</button></div></div>
-            
-            <!-- Man Utd -->
-            <div class="jersey-card" data-category="premier-league"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/5y1Zf4q9/Screenshot-20260702-143138-2.jpg" alt="Man Utd"><h2>Man United Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Man United Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Man United Home 26/27" data-price="22000">💬 Buy</button></div></div>  <!-- Chelsea -->
+            <div class="jersey-card" data-category="premier-league"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/5y1Zf4q9/Screenshot-20260702-143138-2.jpg" alt="Man Utd"><h2>Man United Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Man United Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Man United Home 26/27" data-price="22000">💬 Buy</button></div></div>
             <div class="jersey-card" data-category="premier-league"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/Xq3Tnjc6/Screenshot-20260702-150118-2.jpg" alt="Chelsea"><h2>Chelsea Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Chelsea Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Chelsea Home 26/27" data-price="22000">💬 Buy</button></div></div>
-            
-            <!-- Al Nassr -->
             <div class="jersey-card" data-category="saudi-league"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/8cDqTpdY/Screenshot-20260702-151314-2.jpg" alt="Al Nassr"><h2>Al Nassr Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><p class="low-stock selling-fast">🔥 Selling Fast!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Al Nassr Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Al Nassr Home 26/27" data-price="25000">💬 Buy</button></div></div>
-
-            <!-- Man City -->
             <div class="jersey-card" data-category="premier-league"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/vTMpGYLM/Screenshot-20260702-143301-2.jpg" alt="Man City"><h2>Man City Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Man City Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Man City Home 26/27" data-price="22000">💬 Buy</button></div></div>
-
-            <!-- Barcelona -->
             <div class="jersey-card" data-category="la-liga"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/6qwDBWVS/Screenshot-20260702-150918-2.jpg" alt="Barcelona"><h2>Barcelona Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Barcelona Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Barcelona Home 26/27" data-price="25000">💬 Buy</button></div></div>
-
-            <!-- Napoli -->
-            <div class="jersey-card" data-category="serie-a"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/tJ58TK20/Screenshot-20260702-142625-2.jpg" alt="Napoli"><h2>Napoli Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Napoli Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Napoli Home 26/27" data-price="22000">💬 Buy</button></div></div>
-            
-            <!-- Bayern -->
-            <div class="jersey-card" data-category="bundesliga"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/7hDpqH1j/Screenshot-20260702-150551-2.jpg" alt="Bayern"><h2>Bayern Munich Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Bayern Munich Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Bayern Munich Home 26/27" data-price="25000">💬 Buy</button></div></div>
-
-            <!-- PSG -->
+            <div class="jersey-card" data-category="serie-a"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/tJ58TK20/Screenshot-20260702-142625-2.jpg" alt="Napoli"><h2>Napoli Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Napoli Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Napoli Home 26/27" data-price="22000">💬 Buy</button></div></div><div class="jersey-card" data-category="bundesliga"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/7hDpqH1j/Screenshot-20260702-150551-2.jpg" alt="Bayern"><h2>Bayern Munich Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Bayern Munich Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Bayern Munich Home 26/27" data-price="25000">💬 Buy</button></div></div>
             <div class="jersey-card" data-category="ligue-1"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/4yZrXfbN/Screenshot-20260702-141853-2.jpg" alt="PSG"><h2>PSG Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="PSG Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="PSG Home 26/27" data-price="25000">💬 Buy</button></div></div>
-
-            <!-- Juventus -->
             <div class="jersey-card" data-category="serie-a"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/HnHfTY4C/Screenshot-20260702-144401-2.jpg" alt="Juventus"><h2>Juventus Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Juventus Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Juventus Home 26/27" data-price="22000">💬 Buy</button></div></div>
-
-            <!-- AC Milan -->
             <div class="jersey-card" data-category="serie-a"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/8cDqTpd0/Screenshot-20260702-151813-2.jpg" alt="AC Milan"><h2>AC Milan Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="AC Milan Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="AC Milan Home 26/27" data-price="22000">💬 Buy</button></div></div>
-
-            <!-- Borussia Dortmund -->
             <div class="jersey-card" data-category="bundesliga"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/8cDqTpdq/Screenshot-20260702-145451-2.jpg" alt="Dortmund"><h2>Dortmund Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Dortmund Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Dortmund Home 26/27" data-price="22000">💬 Buy</button></div></div>
-
-            <!-- Atletico Madrid -->
             <div class="jersey-card" data-category="la-liga"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/tJ58TK2H/Screenshot-20260702-141044-2.jpg" alt="Atletico Madrid"><h2>Atletico Madrid Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Atletico Madrid Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Atletico Madrid Home 26/27" data-price="22000">💬 Buy</button></div></div>
-
-            <!-- Tottenham Hotspur -->
             <div class="jersey-card" data-category="premier-league"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/SxytTQk1/Screenshot-20260702-154421-2.jpg" alt="Tottenham"><h2>Tottenham Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Tottenham Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Tottenham Home 26/27" data-price="22000">💬 Buy</button></div></div>
-
-            <!-- Al Hilal -->
             <div class="jersey-card" data-category="saudi-league"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/nrZ6nFKw/Screenshot-20260702-151636-2.jpg" alt="Al Hilal"><h2>Al Hilal Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Al Hilal Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Al Hilal Home 26/27" data-price="25000">💬 Buy</button></div></div>
-
-            <!-- LA Galaxy -->
             <div class="jersey-card" data-category="mls"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/6qwDBWLX/Screenshot-20260702-143938-2.jpg" alt="LA Galaxy"><h2>LA Galaxy Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="LA Galaxy Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="LA Galaxy Home 26/27" data-price="22000">💬 Buy</button></div></div>
-      <!-- Marseille -->
             <div class="jersey-card" data-category="ligue-1"><button class="wishlist-btn" title="Add to Wishlist">♥</button><img src="https://i.postimg.cc/7hDpqHMH/Screenshot-20260702-142857-2.jpg" alt="Marseille"><h2>Marseille Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Marseille Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Marseille Home 26/27" data-price="22000">💬 Buy</button></div></div>
-
         </div>
     </main>
 
@@ -288,11 +243,11 @@
             <h2 style="margin-bottom: 15px;">❤️ Your Wishlist</h2>
             <div id="wishlist-items-container"></div>
         </div>
-    </div>
-
-    <!-- CART MODAL & FLOATING BUTTON -->
+    </div><!-- FLOATING BUTTONS -->
     <button class="wishlist-btn-floating" id="floating-wishlist-btn">❤️<span class="wishlist-count-floating" id="floating-wishlist-count">0</span></button>
     <button class="cart-btn-floating" id="cart-btn">🛒<span class="cart-count" id="cart-count">0</span></button>
+    
+    <!-- CART MODAL -->
     <div class="cart-modal" id="cart-modal">
         <div class="cart-content">
             <button class="close-cart" id="close-cart">&times;</button>
@@ -324,8 +279,7 @@
         <div class="reviews-grid">
             <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Fast delivery and the fabric is top quality! Will definitely buy again."</p><p class="reviewer">- Chinedu from Lagos</p></div>
             <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"The custom printing is perfect. My Messi jersey looks authentic!"</p><p class="reviewer">- Tobi from Abuja</p></div>
-            <div class="review-card"><div>
-class="stars">★★★★★</div><p class="review-text">"Customer service was very helpful on WhatsApp. Highly recommended."</p><p class="reviewer">- Aisha from Port Harcourt</p></div>
+            <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Customer service was very helpful on WhatsApp. Highly recommended."</p><p class="reviewer">- Aisha from Port Harcourt</p></div>
         </div>
     </section>
 
@@ -334,406 +288,274 @@ class="stars">★★★★★</div><p class="review-text">"Customer service was 
         <h2>Frequently Asked Questions</h2>
         <div class="faq-item">
             <button class="faq-question">How long does delivery take? <span>+</span></button>
-            <div class="faq-answer"><p>We offer nationwide delivery right to your doorstep within 2-5 business days dependingon your location.</p></div>
+            <div class="faq-answer"><p>We offer nationwide delivery right to your doorstep within 2-5 business days depending on your location.</p></div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">Do you accept returns? <span>+</span></button>
+      <div class="faq-answer"><p>You can click the "Size Guide" link on any jersey to see exact measurements. Our jerseys fit true to size.</p></div>
     </div>
-    <div class="faq-item">
-        <button class="faq-question">Do you accept returns? <span>+</span></button>
-        <div class="faq-answer"><p>Yes! If the jersey is defective or the wrong size was sent, we accept returns within 3 days of delivery.</p></div>
-    </div>
-    <div class="faq-item">
-        <button class="faq-question">How do I know my size? <span>+</span></button>
-        <div class="faq-answer"><p>You can click the "Size Guide" link on any jersey to see exact measurements. Our jerseys fit true to size.</p></div>
-    </div>
-</section>
+  </section>
 
-<footer>
-    <div class="footer-
-    content">
-            <h3>KickOff Jerseys</h3>
-            <p>Follow us for the latest drops and discounts!</p>
-            <div class="social-links">
-                <a href="https://instagram.com" target="_blank">📸 Instagram</a>
-                <a href="https://facebook.com" target="_blank">📘 Facebook</a>
-                <a href="https://twitter.com" target="_blank">🐦 Twitter</a>
-            </div>
-            <p class="copyright">&copy; 2026 KickOff Jerseys. All rights reserved.</p>
+  <footer>
+    <div class="footer-content">
+      <h3>KickOff Jerseys</h3>
+      <p>Follow us for the latest drops and discounts!</p>
+      <div class="social-links">
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+        <a href="https://facebook.com" target="_blank">Facebook</a>
+        <a href="https://twitter.com" target="_blank">Twitter</a>        </div>
+        <p
+class="copyright">&copy; 2026
+KickOff Jerseys. All rights
+reserved.</p>
         </div>
     </footer>
 
-         <script>
-        document.addEventListener('DOMContentLoaded', () => {
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    if (localStorage.getItem('theme') === 'dark') { body.classList.add('dark-mode'); themeToggle.textContent = '☀️'; }
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) { localStorage.setItem('theme', 'dark'); themeToggle.textContent = '☀️'; }
+        else { localStorage.setItem('theme', 'light'); themeToggle.textContent = '🌙'; }
+    });
 
-            // --- 2. DARK MODE LOGIC ---
-            const themeToggle = document.getElementById('theme-toggle');
-            const body = document.body;
-            if (localStorage.getItem('theme') === 'dark') { body.classList.add('dark-mode'); themeToggle.textContent = '☀️'; }
-            themeToggle.addEventListener('click', () => {
-                body.classList.toggle('dark-mode');
-                if (body.classList.contains('dark-mode')) { localStorage.setItem('theme', 'dark'); themeToggle.textContent = '☀️'; }
-                else { localStorage.setItem('theme', 'light'); themeToggle.textContent = '🌙'; }
-            });
+    const currencySelector = document.getElementById('currency-selector');
+    const rates = { NGN: 1, USD: 1500, GBP: 1900 }; 
+    const symbols = { NGN: '₦', USD: '$', GBP: '£' };
+    let currentCurrency = 'NGN';
 
-            // --- 3. CURRENCY CONVERTER LOGIC ---
-            const currencySelector = document.getElementById('currency-selector');
-            const rates = { NGN: 1, USD: 1500, GBP: 1900 }; 
-            const symbols = { NGN: '₦', USD: '$', GBP: '£' };
-            let currentCurrency = 'NGN';
+    function updatePrices() {
+        currentCurrency = currencySelector.value;
+        const symbol = symbols[currentCurrency];
+        const rate = rates[currentCurrency];
+        document.querySelectorAll('.price').forEach(el => {
+            const basePrice = parseInt(el.getAttribute('data-base-price'));
+            const converted = Math.round(basePrice / rate);
+            const oldPriceEl = el.querySelector('.old-price');
+            if (oldPriceEl) {
+                const baseOld = parseInt(oldPriceEl.getAttribute('data-base-old'));
+                const convertedOld = Math.round(baseOld / rate);
+                el.innerHTML = `<span class="old-price" data-base-old="${baseOld}">${symbol}${convertedOld.toLocaleString()}</span> ${symbol}${converted.toLocaleString()}`;
+            } else { el.textContent = `${symbol}${converted.toLocaleString()}`; }
+        });
+        if (typeof updateCartUI === "function") updateCartUI(); 
+        if (typeof updateWishlistUI === "function") updateWishlistUI(); 
+    }
+    currencySelector.addEventListener('change', updatePrices);
 
-            function updatePrices() {
-                currentCurrency = currencySelector.value;
-                const symbol = symbols[currentCurrency];
-                const rate = rates[currentCurrency];
-
-                document.querySelectorAll('.price').forEach(el => {
-                    const basePrice = parseInt(el.getAttribute('data-base-price'));
-                    const converted = Math.round(basePrice / rate);
-
-                    const oldPriceEl = el.querySelector('.old-price');
-                    if (oldPriceEl) {
-                        const baseOld = parseInt(oldPriceEl.getAttribute('data-base-old'));
-                        const convertedOld = Math.round(baseOld / rate);
-                        el.innerHTML = `<span class="old-price" data-base-old="${baseOld}">${symbol}${convertedOld.toLocaleString()}</span> ${symbol}${converted.toLocaleString()}`;
-                    } else {
-                        el.textContent = `${symbol}${converted.toLocaleString()}`;
-                    }
-                });
-                updateCartUI(); 
-                if (typeof updateWishlistUI === "function") updateWishlistUI(); 
-            }
-            currencySelector.addEventListener('change', updatePrices);
-
-            // --- 4. SIZE GUIDE MODAL LOGIC ---
-            const sizeGuideModal = document.getElementById('size-guide-modal');
-            const closeSizeGuide = document.getElementById('close-size-guide');
-            document.querySelectorAll('.size-guide-link').forEach(link => {
-                link.addEventListener('click', () => sizeGuideModal.style.display = 'flex');
-            });
-            closeSizeGuide.addEventListener('click', () => sizeGuideModal.style.display = 'none');
-            
-            // --- 5. TOAST NOTIFICATIONS ---
-            function showToast(message) {
-                const container = document.getElementById('toast-container');
-                const toast = document.createElement('div');
-                toast.className = 'toast';
-                toast.textContent = message;
-                container.appendChild(toast);
-                setTimeout(() => { toast.remove(); }, 3000);
-            }
-
-            // --- 6. FAQ ACCORDION ---
-            document.querySelectorAll('.faq-item').forEach(item => {
-                const question = item.querySelector('.faq-question');
-                question.addEventListener('click', () => {
-                    const isActive = item.classList.contains('active');
-                    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-                    if (!isActive) item.classList.add('active');
-                });
-            });
-
-            // --- 7. SEARCH, FILTER & SORT ---
-            const searchBar = document.getElementById('search-bar');
-            const sortSelector = document.getElementById('sort-selector');
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const jerseyGrid = document.getElementById('jersey-grid');
-            let jerseyCards = Array.from(document.querySelectorAll('.jersey-card')); 
-            
-            function showCard(card) { if (card.style.display === 'none' || card.style.display === '') { card.style.display = 'block'; card.classList.remove('animate-in'); void card.offsetWidth; card.classList.add('animate-in'); } }
-            function hideCard(card) { card.style.display = 'none'; }
-function applyFiltersAndSort() {
-                const searchString = searchBar.value.toLowerCase();
-                const activeCategory = document.querySelector('.filter-btn.active').getAttribute('data-category');
-                const sortValue = sortSelector.value;
-
-                if (sortValue === 'low-high') {
-                    jerseyCards.sort((a, b) => parseInt(a.querySelector('.price').getAttribute('data-base-price')) - parseInt(b.querySelector('.price').getAttribute('data-base-price')));
-                } else if (sortValue === 'high-low') {
-                    jerseyCards.sort((a, b) => parseInt(b.querySelector('.price').getAttribute('data-base-price')) - parseInt(a.querySelector('.price').getAttribute('data-base-price')));
-                } else {
-                    jerseyCards.sort((a, b) => a.querySelector('h2').textContent.localeCompare(b.querySelector('h2').textContent));
-                }
-
-                jerseyCards.forEach(card => {
-                    jerseyGrid.appendChild(card); 
-                    const name = card.querySelector('h2').textContent.toLowerCase();
-                    const cardCategory = card.getAttribute('data-category');
-                    const matchesSearch = name.includes(searchString);
-                    const matchesCategory = (activeCategory === 'all' || activeCategory === cardCategory);
-                    
-                    if (matchesSearch && matchesCategory) {
-                        showCard(card);
-                    } else {
-                        hideCard(card);
-                    }
-                });
-            }
-
-            searchBar.addEventListener('input', applyFiltersAndSort);
-            sortSelector.addEventListener('change', applyFiltersAndSort);
-
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    applyFiltersAndSort();
-                });
-            });
-
-            // --- 7.5 VOICE SEARCH LOGIC ---
-            const voiceSearchBtn = document.getElementById('voice-search-btn');
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            
-            if (SpeechRecognition) {
-                const recognition = new SpeechRecognition();
-                recognition.continuous = false;
-                recognition.lang = 'en-US';
-                recognition.interimResults = false;
-
-                voiceSearchBtn.addEventListener('click', () => { recognition.start(); });
-
-                recognition.onstart = function() {
-                    voiceSearchBtn.classList.add('listening');
-                    searchBar.placeholder = "Listening...";
-                };
-
-                recognition.onspeechend = function() {
-                    voiceSearchBtn.classList.remove('listening');
-                    searchBar.placeholder = "Search for a jersey...";
-                };
-
-                recognition.onresult = function(event) {
-                    const transcript = event.results[0][0].transcript;
-                    searchBar.value = transcript;
-                    applyFiltersAndSort(); 
-                    showToast(`🎤 Searched for: "${transcript}"`);
-                };
-
-                recognition.onerror = function(event) {
-                    voiceSearchBtn.classList.remove('listening');
-                    searchBar.placeholder = "Search for a jersey...";
-                    if (event.error === 'not-allowed') {
-                        alert("Microphone access is blocked. Please ensure you are on a secure connection (HTTPS) and allow microphone permissions in your browser settings.");
-                    } else if (event.error !== 'no-speech') {
-                        showToast("🎤 Voice search error: " + event.error);
-                    }
-                };
-            } else {
-                voiceSearchBtn.style.display = 'none';
-            }
-            
-            // --- 8. CART, PROMO & WHATSAPP ---
-            let cart = [];
-            let discount = 0;
-            const cartBtn = document.getElementById('cart-btn');
-            const cartModal = document.getElementById('cart-modal');
-            const closeCartBtn = document.getElementById('close-cart');
-            const cartItemsContainer = document.getElementById('cart-items-container');
-            const cartCount = document.getElementById('cart-count');
-            const cartTotalPrice = document.getElementById('cart-total-price');
-            const cartCurrencySymbol = document.getElementById('cart-currency-symbol');
-            const checkoutBtn = document.getElementById('checkout-btn');
-            const promoInput = document.getElementById('promo-input');
-            const applyPromoBtn = document.getElementById('apply-promo-btn');
-            const discountMessage = document.getElementById('discount-message');
-            const myPhoneNumber = "2347042603059";
-
-            cartBtn.addEventListener('click', () => cartModal.style.display = 'flex');
-            closeCartBtn.addEventListener('click', () => cartModal.style.display = 'none');
-            window.addEventListener('click', (e) => { 
-                if (e.target === cartModal) cartModal.style.display = 'none'; 
-                if (e.target === sizeGuideModal) sizeGuideModal.style.display = 'none';
-                const wishlistModal = document.getElementById('wishlist-modal');
-                if (wishlistModal && e.target === wishlistModal) wishlistModal.style.display = 'none';
-            });
-
-            applyPromoBtn.addEventListener('click', () => {
-                if (promoInput.value.trim().toUpperCase() === 'KICKOFF10') {
-                    discount = 0.10;
-                    discountMessage.style.display = 'block';
-                    updateCartUI();
-                    showToast("🎟️ Promo code applied!");
-                } else {
-                    alert('Invalid Promo Code');
-                    discount = 0;
-                    discountMessage.style.display = 'none';
-                    updateCartUI();
-                }
-            });
-
-            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const card = e.target.closest('.jersey-card');
-                    const name = button.getAttribute('data-name');
-                    const basePrice = parseInt(button.getAttribute('data-price'));
-                    const size = card.querySelector('.size-selector').value;
-                    const customName = card.querySelector('.custom-name-input').value.trim();
-
-                    let displayName = name;
-                    if (customName !== "") displayName += ` (Custom: ${customName})`;
-
-                    cart.push({ name: displayName, basePrice, size });
-                    updateCartUI();
-                    showToast(`✅ ${name} added to cart!`);
-                });
-            });
-
-            document.querySelectorAll('.whatsapp-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const card = e.target.closest('.jersey-card');
-                    const jerseyName = button.getAttribute('data-name');
-                    const basePrice = parseInt(button.getAttribute('data-price'));
-                    const selectedSize = card.querySelector('.size-selector').value;
-                    const customName = card.querySelector('.custom-name-input').value.trim();
-
-                    const rate = rates[currentCurrency];
-                    const symbol = symbols[currentCurrency];
-                    const convertedPrice = Math.round(basePrice / rate).toLocaleString();
-
-                    let customText = customName !== "" ? ` with custom printing [${customName}]` : "";
-                    const message = `Hello! I am interested in buying the ${jerseyName} jersey${customText} (Size: ${selectedSize}) for ${symbol}${convertedPrice}. Is it still available?`;
-                    
-                    window.open(`https://wa.me/${myPhoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
-                });
-            });
-
-            function updateCartUI() {
-                cartCount.textContent = cart.length;
-                cartItemsContainer.innerHTML = '';
-                let subtotalBase = 0;
-                const rate = rates[currentCurrency];
-                const symbol = symbols[currentCurrency];
-                cartCurrencySymbol.textContent = symbol;
-
-                if (cart.length === 0) {
-                    cartItemsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Your cart is empty.</p>';
-                    cartTotalPrice.textContent = '0';
-                    return;  } 
-
-                cart.forEach((item, index) => {
-                    subtotalBase += item.basePrice;
-                    const convertedPrice = Math.round(item.basePrice / rate).toLocaleString();
-
-                    const itemEl = document.createElement('div');
-                    itemEl.className = 'cart-item';
-                    itemEl.innerHTML = `
-                        <div class="cart-item-details">
-                            <div class="cart-item-title">${item.name}</div>
-                            <div class="cart-item-title" style="font-weight:normal; font-size:0.9rem;">Size: ${item.size}</div>
-                            <div class="cart-item-price">${symbol}${convertedPrice}</div>
-                        </div>
-                        <button class="remove-btn" onclick="removeFromCart(${index})">✖</button>
-                    `;
-                    cartItemsContainer.appendChild(itemEl);
-                });
-
-                let subtotalConverted = Math.round(subtotalBase / rate);
-                let totalConverted = Math.round(subtotalConverted - (subtotalConverted * discount));
-
-                if (discount > 0) {
-                    cartTotalPrice.innerHTML = `<span class="original-price">${symbol}${subtotalConverted.toLocaleString()}</span> ${totalConverted.toLocaleString()}`;
-                } else {
-                    cartTotalPrice.textContent = totalConverted.toLocaleString();
-                }
-            }
-
-            window.removeFromCart = function(index) {
-                cart.splice(index, 1);
-                updateCartUI();
-            };
-
-            checkoutBtn.addEventListener('click', () => {
-                if (cart.length === 0) { alert("Your cart is empty!"); return; }
-
-                const rate = rates[currentCurrency];
-                const symbol = symbols[currentCurrency];
-                let message = "Hello! I would like to place an order for the following items:\n\n";
-                let subtotalBase = 0;
-
-                cart.forEach((item, index) => {
-                    const convertedPrice = Math.round(item.basePrice / rate).toLocaleString();
-                    message += `${index + 1}. ${item.name} - Size: ${item.size} (${symbol}${convertedPrice})\n`;
-                    subtotalBase += item.basePrice;
-                });
-
-                let subtotalConverted = Math.round(subtotalBase / rate);
-                let totalConverted = Math.round(subtotalConverted - (subtotalConverted * discount));
-
-                if (discount > 0) {
-                    message += `\n*Subtotal: ${symbol}${subtotalConverted.toLocaleString()}*`;
-                    message += `\n*Discount (10%): -${symbol}${Math.round(subtotalConverted * discount).toLocaleString()}*`;
-                }
-
-                message += `\n*Total Price: ${symbol}${totalConverted.toLocaleString()}*\n\nIs this available?`;
-                
-                window.open(`https://wa.me/${myPhoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
-            });
-
-            // --- 9. WISHLIST LOGIC (Local Storage & UI) ---
-            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-            const wishlistModal = document.getElementById('wishlist-modal');
-            const headerWishlistBtn = document.getElementById('floating-wishlist-btn');
-            const closeWishlistBtn = document.getElementById('close-wishlist');
-            const wishlistItemsContainer = document.getElementById('wishlist-items-container');
-            const headerWishlistCount = document.getElementById('floating-wishlist-count');
-
-            if (headerWishlistBtn && wishlistModal) {
-                headerWishlistBtn.addEventListener('click', () => wishlistModal.style.display = 'flex');
-                closeWishlistBtn.addEventListener('click', () => wishlistModal.style.display = 'none');
-            }
-
-            document.querySelectorAll('.jersey-card').forEach(card => {
-                const name = card.querySelector('h2').textContent;
-                const heartBtn = card.querySelector('.wishlist-btn');
-                
-                if (wishlist.some(item => item.name === name)) {
-                    heartBtn.classList.add('active');
-                }
-
-                heartBtn.addEventListener('click', () => {
-                    const basePrice = parseInt(card.querySelector('.price').getAttribute('data-base-price'));
-                    const imgSrc = card.querySelector('img').src;
-                    const existingIndex = wishlist.findIndex(item => item.name === name);
-                    
-                    if (existingIndex > -1) {
-                        wishlist.splice(existingIndex, 1); 
-                        heartBtn.classList.remove('active');
-                        showToast(`💔 Removed from wishlist`);
-                    } else {
-                        wishlist.push({ name, basePrice, imgSrc }); 
-                        heartBtn.classList.add('active');
-                        showToast(`❤️ Added to wishlist!`);
-                    }
-                    
-                    localStorage.setItem('wishlist', JSON.stringify(wishlist));
-                    if (typeof updateWishlistUI === "function") updateWishlistUI();
-                });
-            });
-
-            window.updateWishlistUI = function() {
-                if (!headerWishlistCount || !wishlistItemsContainer) return;
-                
-                headerWishlistCount.textContent = wishlist.length;
-                wishlistItemsContainer.innerHTML = '';
-                const rate = rates[currentCurrency];
-                const symbol = symbols[currentCurrency];
-
-                if (wishlist.length === 0) {
-                    wishlistItemsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Your wishlist is empty.</p>';
-                    return;
-                }
-
-                wishlist.forEach((item, index) => {
-                    const convertedPrice = Math.round(item.basePrice / rate).toLocaleString();
-                    const itemEl = document.createElement('div');
-                    itemEl.className = 'cart-item';
-                    itemEl.innerHTML = `
-                        <img src="${item.imgSrc}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 15px;">
-                        <div class="cart-item-details">
-                            <div class="cart-item-title">${item.name}</div>
-                            <div class="cart-item-price">${symbol}${convertedPrice}</div>
-                        </div>
-                        <button class="remove-btn"   
+    const sizeGuideModal = document.getElementById('size-guide-modal');
+    const closeSizeGuide = document.getElementById('close-size-guide');
+    document.querySelectorAll('.size-guide-link').forEach(link => { link.addEventListener('click', () => sizeGuideModal.style.display = 'flex'); });
+    closeSizeGuide.addEventListener('click', () => sizeGuideModal.style.display = 'none');
     
+    function showToast(message) {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = 'toast'; toast.textContent = message;
+        container.appendChild(toast);
+        setTimeout(() => { toast.remove(); }, 3000);
+    }
+
+    document.querySelectorAll('.faq-item').forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+            if (!isActive) item.classList.add('active');
+        });
+    });
+
+    const searchBar = document.getElementById('search-bar');
+    const sortSelector = document.getElementById('sort-selector');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const jerseyGrid = document.getElementById('jersey-grid');
+    let jerseyCards = Array.from(document.querySelectorAll('.jersey-card')); function showCard(card) { if (card.style.display === 'none' || card.style.display === '') { card.style.display = 'block'; card.classList.remove('animate-in'); void card.offsetWidth; card.classList.add('animate-in'); } }
+    function hideCard(card) { card.style.display = 'none'; }
+
+    function applyFiltersAndSort() {
+        const searchString = searchBar.value.toLowerCase();
+        const activeCategory = document.querySelector('.filter-btn.active').getAttribute('data-category');
+        const sortValue = sortSelector.value;
+        if (sortValue === 'low-high') { jerseyCards.sort((a, b) => parseInt(a.querySelector('.price').getAttribute('data-base-price')) - parseInt(b.querySelector('.price').getAttribute('data-base-price'))); } 
+        else if (sortValue === 'high-low') { jerseyCards.sort((a, b) => parseInt(b.querySelector('.price').getAttribute('data-base-price')) - parseInt(a.querySelector('.price').getAttribute('data-base-price'))); } 
+        else { jerseyCards.sort((a, b) => a.querySelector('h2').textContent.localeCompare(b.querySelector('h2').textContent)); }
+        jerseyCards.forEach
+        (card => {
+            jerseyGrid.appendChild(card); 
+            const name = card.querySelector('h2').textContent.toLowerCase();
+            const cardCategory = card.getAttribute('data-category');
+            const matchesSearch = name.includes(searchString);
+            const matchesCategory = (activeCategory === 'all' || activeCategory === cardCategory);
+            if (matchesSearch && matchesCategory) { showCard(card); } else { hideCard(card); }
+        });
+    }
+
+    searchBar.addEventListener('input', applyFiltersAndSort);
+    sortSelector.addEventListener('change', applyFiltersAndSort);
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active'); applyFiltersAndSort();
+        });
+    });
+
+    const voiceSearchBtn = document.getElementById('voice-search-btn');
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+        const recognition = new SpeechRecognition();
+        recognition.continuous = false; recognition.lang = 'en-US'; recognition.interimResults = false;
+        voiceSearchBtn.addEventListener('click', () => { recognition.start(); });
+        recognition.onstart = function() { voiceSearchBtn.classList.add('listening'); searchBar.placeholder = "Listening..."; };
+        recognition.onspeechend = function() { voiceSearchBtn.classList.remove('listening'); searchBar.placeholder = "Search for a jersey..."; };
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            searchBar.value = transcript; applyFiltersAndSort(); showToast(`🎤 Searched for: "${transcript}"`);
+        };
+        recognition.onerror = function(event) {
+            voiceSearchBtn.classList.remove('listening'); searchBar.placeholder = "Search for a jersey...";
+            if (event.error === 'not-allowed') { alert("Microphone access is blocked. Please ensure you are on a secure connection (HTTPS) and allow microphone permissions in your browser settings."); } 
+            else if (event.error !== 'no-speech') { showToast("🎤 Voice search error: " + event.error); }
+        };
+    } else { voiceSearchBtn.style.display = 'none'; }
+    
+    let cart = []; let discount = 0;
+    const cartBtn = document.getElementById('cart-btn'); const cartModal = document.getElementById('cart-modal');
+    const closeCartBtn = document.getElementById('close-cart'); const cartItemsContainer = document.getElementById('cart-items-container');
+    const cartCount = document.getElementById('cart-count'); const cartTotalPrice = document.getElementById('cart-total-price');
+    const cartCurrencySymbol = document.getElementById('cart-currency-symbol'); const checkoutBtn = document.getElementById('checkout-btn');
+    const promoInput = document.getElementById('promo-input'); const applyPromoBtn = document.getElementById('apply-promo-btn');
+    const discountMessage = document.getElementById('discount-message'); const myPhoneNumber = "2347042603059";
+
+    cartBtn.addEventListener('click', () => cartModal.style.display = 'flex');
+    closeCartBtn.addEventListener('click', () => cartModal.style.display = 'none');
+    window.addEventListener('click', (e) => { 
+        if (e.target === cartModal) cartModal.style.display = 'none'; 
+        if (e.target === sizeGuideModal) sizeGuideModal.style.display = 'none';
+        const wishlistModal = document.getElementById('wishlist-modal');
+        if (wishlistModal && e.target === wishlistModal) wishlistModal.style.display = 'none';
+    });
+
+    applyPromoBtn.addEventListener('click', () => {
+        if (promoInput.value.trim().toUpperCase() === 'KICKOFF10') { discount = 0.10; discountMessage.style.display = 'block'; updateCartUI(); showToast("🎟️ Promo code applied!"); } 
+        else { alert('Invalid Promo Code'); discount = 0; discountMessage.style.display = 'none'; updateCartUI(); }
+    });
+
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const card = e.target.closest('.jersey-card'); const name = button.getAttribute('data-name');
+            const basePrice = parseInt(button.getAttribute('data-price')); const size = card.querySelector('.size-selector').value;
+            const customName = card.querySelector('.custom-name-input').value.trim();
+            let displayName = name; if (customName !== "") displayName += ` (Custom: ${customName})`;
+            cart.push({ name: displayName, basePrice, size }); updateCartUI(); showToast(`✅ ${name} added to cart!`);
+        });
+    });
+
+    document.querySelectorAll('.whatsapp-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const card = e.target.closest('.jersey-card'); const jerseyName = button.getAttribute('data-name');
+            const basePrice = parseInt(button.getAttribute('data-price')); const selectedSize = card.querySelector('.size-selector').value;
+            const customName = card.querySelector('.custom-name-input').value.trim();
+            const rate = rates[currentCurrency]; const symbol = symbols[currentCurrency];
+            const convertedPrice = Math.round(basePrice / rate).toLocaleString();
+            let customText = customName !== "" ? ` with custom printing [${customName}]` : "";
+            const message = `Hello! I am interested in buying the ${jerseyName} jersey${customText} (Size: ${selectedSize}) for ${symbol}${convertedPrice}. Is it still available?`;
+            window.open(`https://wa.me/${myPhoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        });
+    });
+
+    window.updateCartUI = function() {
+        cartCount.textContent = cart.length; cartItemsContainer.innerHTML = ''; let subtotalBase = 0;
+        const rate = rates[currentCurrency]; const symbol = symbols[currentCurrency]; cartCurrencySymbol.textContent = symbol;
+        if (cart.length === 0) { cartItemsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Your cart is empty.</p>'; cartTotalPrice.textContent = '0'; return; } 
+        cart.forEach((item, index) => {
+            subtotalBase += item.basePrice; const convertedPrice = Math.round(item.basePrice / rate).toLocaleString();
+            const itemEl = document.createElement('div'); itemEl.className = 'cart-item';
+            itemEl.innerHTML = `<div class="cart-item-details"><div class="cart-item-title">${item.name}</div><div class="cart-item-title" style="font-weight:normal; font-size:0.9rem;">Size: ${item.size}</div><div class="cart-item-price">${symbol}${convertedPrice}</div></div><button class="remove-btn" onclick="removeFromCart(${index})">✖</button>`;
+            cartItemsContainer.appendChild(itemEl);
+        });
+        let subtotalConverted = Math.round(subtotalBase / rate); let totalConverted = Math.round(subtotalConverted - (subtotalConverted * discount));
+        if (discount > 0) { cartTotalPrice.innerHTML = `<span class="original-price">${symbol}${subtotalConverted.toLocaleString()}</span> ${totalConverted.toLocaleString()}`; } 
+        else { cartTotalPrice.textContent = totalConverted.toLocaleString(); }
+    }
+
+    window.removeFromCart = function(index) { cart.splice(index, 1); updateCartUI(); };
+
+    checkoutBtn.addEventListener('click', () => {
+        if (cart.length === 0) { alert("Your cart is empty!"); return; }
+        const rate = rates[currentCurrency]; const symbol = symbols[currentCurrency];
+        let message = "Hello! I would like to place an order for the following items:\n\n"; let subtotalBase = 0;
+        cart.forEach((item, index) => {
+            const convertedPrice = Math.round(item.basePrice / rate).toLocaleString();
+            message += `${index + 1}. ${item.name} - Size: ${item.size} (${symbol}${convertedPrice})\n`; subtotalBase += item.basePrice;
+        });
+        let subtotalConverted = Math.round(subtotalBase / rate); let totalConverted = Math.round(subtotalConverted - (subtotalConverted * discount));
+        if (discount > 0) { message += `\n*Subtotal: ${symbol}${subtotalConverted.toLocaleString()}*\n*Discount (10%): -${symbol}${Math.round(subtotalConverted * discount).toLocaleString()}*`; }
+        message += `\n*Total Price: ${symbol}${totalConverted.toLocaleString()}*\n\nIs this available?`;window.open(`https://wa.me/${myPhoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    });
+
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    const wishlistModal = document.getElementById('wishlist-modal');
+    const headerWishlistBtn = document.getElementById('floating-wishlist-btn');
+    const closeWishlistBtn = document.getElementById('close-wishlist');
+    const wishlistItemsContainer = document.getElementById('wishlist-items-container');
+    const headerWishlistCount = document.getElementById('floating-wishlist-count');
+
+    if (headerWishlistBtn && wishlistModal) {
+        headerWishlistBtn.addEventListener('click', () => wishlistModal.style.display = 'flex');
+        closeWishlistBtn.addEventListener('click', () => wishlistModal.style.display = 'none');
+    }
+
+    document.querySelectorAll('.jersey-card').forEach(card => {
+        const name = card.querySelector('h2').textContent;
+        const heartBtn = card.querySelector('.wishlist-btn');
+        if (wishlist.some(item => item.name === name)) { heartBtn.classList.add('active'); }
+        heartBtn.addEventListener('click', () => {
+            const basePrice = parseInt(card.querySelector('.price').getAttribute('data-base-price'));
+            const imgSrc = card.querySelector('img').src;
+            const existingIndex = wishlist.findIndex(item => item.name === name);
+            if (existingIndex > -1) {
+                wishlist.splice(existingIndex, 1); heartBtn.classList.remove('active'); showToast(`💔 Removed from wishlist`);
+            } else {
+                wishlist.push({ name, basePrice, imgSrc }); heartBtn.classList.add('active'); showToast(`❤️ Added to wishlist!`);
+            }
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            if (typeof updateWishlistUI === "function") updateWishlistUI();
+        });
+    });
+
+    window.updateWishlistUI = function() {
+        if (!headerWishlistCount || !wishlistItemsContainer) return;
+        headerWishlistCount.textContent = wishlist.length; wishlistItemsContainer.innerHTML = '';
+        const rate = rates[currentCurrency]; const symbol = symbols[currentCurrency];
+        if (wishlist.length === 0) { wishlistItemsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Your wishlist is empty.</p>'; return; }
+        wishlist.forEach((item, index) => {
+            const convertedPrice = Math.round(item.basePrice / rate).toLocaleString();
+            const itemEl = document.createElement('div'); itemEl.className = 'cart-item';
+            itemEl.innerHTML = `<img src="${item.imgSrc}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 15px;"><div class="cart-item-details"><div class="cart-item-title">${item.name}</div><div class="cart-item-price">${symbol}${convertedPrice}</div></div><button class="remove-btn" onclick="removeFromWishlist(${index})">✖</button>`;
+            wishlistItemsContainer.appendChild(itemEl);
+        });
+    }
+
+    window.removeFromWishlist = function(index) {
+        const removedItem = wishlist.splice(index, 1)[0];
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        document.querySelectorAll('.jersey-card').forEach(card => {
+            if (card.querySelector('h2').textContent === removedItem.name) { card.querySelector('.wishlist-btn').classList.remove('active'); }
+        });
+        if (typeof updateWishlistUI === "function") updateWishlistUI();
+        showToast(`💔 Removed from wishlist`);
+    };
+
+    applyFiltersAndSort();
+    updatePrices(); 
+    if (typeof updateWishlistUI === "function") updateWishlistUI();
+});
+</script>
+
 </body>
 </html>
 
-           
+    
