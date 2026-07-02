@@ -24,7 +24,9 @@
         
         /* --- CONTROLS & GRID --- */
         .controls-section { max-width: 1200px; margin: 20px auto; padding: 0 20px; text-align: center; }
-        #search-bar { width: 100%; max-width: 400px; padding: 12px 20px; font-size: 1rem; border: 2px solid #ccc; border-radius: 25px; margin-bottom: 20px; transition: 0.3s; }
+        .search-sort-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        #search-bar { width: 100%; max-width: 400px; padding: 12px 20px; font-size: 1rem; border: 2px solid #ccc; border-radius: 25px; transition: 0.3s; outline: none; }
+        .sort-selector { padding: 12px 20px; font-size: 1rem; border: 2px solid #ccc; border-radius: 25px; outline: none; cursor: pointer; background-color: white; transition: 0.3s; }
         .filter-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px; }
         .filter-btn { background-color: #e0e0e0; color: #333; padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; transition: 0.3s; font-weight: bold; }
         .filter-btn.active { background-color: #1a1a1a; color: #00ff88; }
@@ -107,8 +109,7 @@
         .feature-box h3 { font-size: 1.2rem; margin-bottom: 10px; color: #1a1a1a; transition: 0.3s; }
         .feature-box p { color: #666; font-size: 0.95rem; line-height: 1.4; transition: 0.3s; }
         footer { background-color: #1a1a1a; color: white; text-align: center; padding: 40px 20px 20px 20px; margin-top: 40px; transition: 0.3s; }
-        .footer-content h3 { color: #00ff88; font-size: 1.8rem; margin
-        -bottom: 10px; }
+        .footer-content h3 { color: #00ff88; font-size: 1.8rem; margin-bottom: 10px; }
         .footer-content p { margin-bottom: 20px; color: #ccc; }
         .social-links { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
         .social-links a { background-color: #333; color: white; text-decoration: none; padding: 10px 20px; border-radius: 25px; font-weight: bold; transition: background 0.3s; }
@@ -121,7 +122,7 @@
         body.dark-mode .jersey-card, body.dark-mode .feature-box, body.dark-mode .cart-content, body.dark-mode .review-card, body.dark-mode .faq-item { background-color: #1e1e1e; color: #f4f4f9; box-shadow: 0 4px 8px rgba(255,255,255,0.05); }
         body.dark-mode .filter-btn { background-color: #333; color: #f4f4f9; }
         body.dark-mode .filter-btn.active { background-color: #00ff88; color: #1a1a1a; }
-        body.dark-mode #search-bar, body.dark-mode .size-selector, body.dark-mode .custom-name-input, body.dark-mode .promo-input { background-color: #333; color: #f4f4f9; border-color: #555; }
+        body.dark-mode #search-bar, body.dark-mode .sort-selector, body.dark-mode .size-selector, body.dark-mode .custom-name-input, body.dark-mode .promo-input { background-color: #333; color: #f4f4f9; border-color: #555; }
         body.dark-mode .close-cart { color: #f4f4f9; }
         body.dark-mode .cart-item, body.dark-mode .promo-container { border-color: #444; }
         body.dark-mode .cart-total { border-top-color: #555; }
@@ -137,8 +138,6 @@
     </style>
 </head>
 <body>
-
-    
 
     <!-- TOAST NOTIFICATION CONTAINER -->
     <div id="toast-container"></div>
@@ -158,7 +157,14 @@
 
     <main>
         <div class="controls-section">
-            <input type="text" id="search-bar" placeholder="Search for a jersey...">
+            <div class="search-sort-container">
+                <input type="text" id="search-bar" placeholder="Search for a jersey...">
+                <select id="sort-selector" class="sort-selector">
+                    <option value="default">Sort by: Default</option>
+                    <option value="low-high">Price: Low to High</option>
+                    <option value="high-low">Price: High to Low</option>
+                </select>
+            </div>
             <div class="filter-buttons">
                 <button class="filter-btn active" data-category="all">All</button>
                 <button class="filter-btn" data-category="la-liga">La Liga</button>
@@ -171,41 +177,67 @@
             </div>
         </div>
 
-        <div class="jersey-grid">
+        <div class="jersey-grid" id="jersey-grid">
             <!-- Real Madrid -->
             <div class="jersey-card" data-category="la-liga"><img src="https://i.postimg.cc/G2XP9sM6/Screenshot-20260701-152727-2.jpg" alt="Real Madrid"><h2>Real Madrid Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><p class="low-stock">⏳ Only 2 left in stock!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Real Madrid Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Real Madrid Home 26/27" data-price="25000">💬 Buy</button></div></div>
             
             <!-- Arsenal -->
-            <div class="jersey-card" data-category="premier-league"><div class="sale-badge">SALE 🔥</div><img src="https://i.postimg.cc/5N39ZqRF/Screenshot-20260701-121110-2.jpg" alt="Arsenal"><h2>Arsenal Home 26/25</h2><p class="price" data-base-price="22000"><span class="old-price" data-base-old="28000">₦28,000</span> ₦22,000</p><p class="low-stock selling-fast">🔥 Selling Fast!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Arsenal Home 26/27 (SALE)" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Arsenal Home 26/27 (SALE)" data-price="22000">💬 Buy</button></div></div>
+            <div class="jersey-card" data-category="premier-league"><div class="sale-badge">SALE 🔥</div><img src="https://i.postimg.cc/5N39ZqRF/Screenshot-20260701-121110-2.jpg" alt="Arsenal"><h2>Arsenal Home 26/27</h2><p class="price" data-base-price="22000"><span class="old-price" data-base-old="28000">₦28,000</span> ₦22,000</p><p class="low-stock selling-fast">🔥 Selling Fast!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Arsenal Home 26/27 (SALE)" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Arsenal Home 26/27 (SALE)" data-price="22000">💬 Buy</button></div></div>
             
             <!-- Liverpool -->
             <div class="jersey-card" data-category="premier-league"><img src="https://i.postimg.cc/GmcyTxNP/Screenshot-20260701-160052-2.jpg" alt="Liverpool"><h2>Liverpool Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Liverpool Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Liverpool Home 26/27" data-price="22000">💬 Buy</button></div></div>
             
             <!-- Inter Miami -->
-            <div class="jersey-card" data-category="mls"><img src="https://i.postimg.cc/pXxXG1qf/Screenshot-20260701-121207-2.jpg" alt="Inter Miami"><h2>Inter Miami - Messi #10</h2><p class="price" data-base-price="25000">₦25,000</p><p class="low-stock">⏳ Only 1 left!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Inter Miami - Messi #10" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Inter Miami - Messi #10" data-price="25000">💬 Buy</button></div></div>
+            <div class="jersey-card" data-category="mls"><img src="https://i.postimg.cc/pXxXG1qf/Screenshot-20260701-121207-2.jpg" alt="Inter Miami"><h2>Inter Miami - Messi #10</h2><p class="price" data-base-price="25000">₦25,000</p><p class="low-stock">⏳ Only 1 left!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="
+            M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Inter Miami - Messi #10" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Inter Miami - Messi #10" data-price="25000">💬 Buy</button></div></div>
             
             <!-- Man Utd -->
             <div class="jersey-card" data-category="premier-league"><img src="https://i.postimg.cc/Nf4GW7zK/Screenshot-20260701-134913-2.jpg" alt="Man Utd"><h2>Man United Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Man United Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Man United Home 26/27" data-price="22000">💬 Buy</button></div></div>
-                        <!-- Chelsea -->
-            <div class="jersey-card" data-category="premier-league"><img src="https://i.postimg.cc/Pr4fBzRp/Screenshot-20260701-135027-2.jpg" alt="Chelsea"><h2>Chelsea Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Chelsea Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Chelsea Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Chelsea Home 26/27" data-price="22000">💬 Buy</button></div></div>
+            
+            <!-- Chelsea -->
+            <div class="jersey-card" data-category="premier-league"><img src="https://i.postimg.cc/Pr4fBzRp/Screenshot-20260701-135027-2.jpg" alt="Chelsea"><h2>Chelsea Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Chelsea Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Chelsea Home 26/27" data-price="22000">💬 Buy</button></div></div>
             
             <!-- Al Nassr -->
             <div class="jersey-card" data-category="saudi-league"><img src="https://i.postimg.cc/MHKSbgmm/Screenshot-20260701-153607-2.jpg" alt="Al Nassr"><h2>Al Nassr Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><p class="low-stock selling-fast">🔥 Selling Fast!</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Al Nassr Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Al Nassr Home 26/27" data-price="25000">💬 Buy</button></div></div>
-            
+
             <!-- Man City -->
             <div class="jersey-card" data-category="premier-league"><img src="https://i.postimg.cc/N0qL7f95/Screenshot-20260701-154728-2.jpg" alt="Man City"><h2>Man City Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Man City Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Man City Home 26/27" data-price="22000">💬 Buy</button></div></div>
-            
+
             <!-- Barcelona -->
             <div class="jersey-card" data-category="la-liga"><img src="https://i.postimg.cc/RCy3VRS7/Screenshot-20260701-155541-2.jpg" alt="Barcelona"><h2>Barcelona Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Barcelona Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Barcelona Home 26/27" data-price="25000">💬 Buy</button></div></div>
-            
+
             <!-- Napoli -->
             <div class="jersey-card" data-category="serie-a"><img src="https://i.postimg.cc/MTDkHxjB/Screenshot-20260701-160501-2.jpg" alt="Napoli"><h2>Napoli Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Napoli Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Napoli Home 26/27" data-price="22000">💬 Buy</button></div></div>
             
             <!-- Bayern -->
             <div class="jersey-card" data-category="bundesliga"><img src="https://i.postimg.cc/6qpQ5MTN/Screenshot-20260701-161557-2.jpg" alt="Bayern"><h2>Bayern Munich Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Bayern Munich Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Bayern Munich Home 26/27" data-price="25000">💬 Buy</button></div></div>
-            
+
             <!-- PSG -->
             <div class="jersey-card" data-category="ligue-1"><img src="https://i.postimg.cc/Ssy9C7J4/Screenshot-20260701-162553-2.jpg" alt="PSG"><h2>PSG Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="PSG Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="PSG Home 26/27" data-price="25000">💬 Buy</button></div></div>
+
+            <!-- Juventus -->
+            <div class="jersey-card" data-category="serie-a"><img src="https://i.postimg.cc/7LqB75dS/Screenshot-20260702-025238-2.jpg" alt="Juventus"><h2>Juventus Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Juventus Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Juventus Home 26/27" data-price="22000">💬 Buy</button></div></div>
+            <!-- AC Milan -->
+            <div class="jersey-card" data-category="serie-a"><img src="https://i.postimg.cc/pXXzDDXQ/Screenshot-20260702-045027-2.jpg" alt="AC Milan"><h2>AC Milan Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="AC Milan Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="AC Milan Home 26/27" data-price="22000">💬 Buy</button></div></div>
+
+            <!-- Borussia Dortmund -->
+            <div class="jersey-card" data-category="bundesliga"><img src="https://i.postimg.cc/Z5Pm4y6S/Screenshot-20260702-045345-2.jpg" alt="Dortmund"><h2>Dortmund Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Dortmund Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Dortmund Home 26/27" data-price="22000">💬 Buy</button></div></div>
+
+            <!-- Atletico Madrid -->
+            <div class="jersey-card" data-category="la-liga"><img src="https://i.postimg.cc/dtYvXByv/Screenshot-20260702-045644-2.jpg" alt="Atletico Madrid"><h2>Atletico Madrid Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Atletico Madrid Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Atletico Madrid Home 26/27" data-price="22000">💬 Buy</button></div></div>
+
+            <!-- Tottenham Hotspur -->
+            <div class="jersey-card" data-category="premier-league"><img src="https://i.postimg.cc/rwHH6VPr/Screenshot-20260702-050134-2.jpg" alt="Tottenham"><h2>Tottenham Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Tottenham Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Tottenham Home 26/27" data-price="22000">💬 Buy</button></div></div>
+
+            <!-- Al Hilal -->
+            <div class="jersey-card" data-category="saudi-league"><img src="https://i.postimg.cc/P5DWxdqL/Screenshot-20260702-050356-2.jpg" alt="Al Hilal"><h2>Al Hilal Home 26/27</h2><p class="price" data-base-price="25000">₦25,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Al Hilal Home 26/27" data-price="25000">🛒 Cart</button><button class="whatsapp-btn" data-name="Al Hilal Home 26/27" data-price="25000">💬 Buy</button></div></div>
+
+            <!-- LA Galaxy -->
+            <div class="jersey-card" data-category="mls"><img src="https://i.postimg.cc/mrbPs4zS/Screenshot-20260702-050627-2.jpg" alt="LA Galaxy"><h2>LA Galaxy Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="LA Galaxy Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="LA Galaxy Home 26/27" data-price="22000">💬 Buy</button></div></div>
+
+            <!-- Marseille -->
+            <div class="jersey-card" data-category="ligue-1"><img src="https://i.postimg.cc/ZqRyNZbJ/Screenshot-20260702-050848-2.jpg" alt="Marseille"><h2>Marseille Home 26/27</h2><p class="price" data-base-price="22000">₦22,000</p><a class="size-guide-link">📏 Size Guide</a><select class="size-selector"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select><input type="text" class="custom-name-input" placeholder="Name & Number (Optional)"><div class="action-buttons"><button class="add-to-cart-btn" data-name="Marseille Home 26/27" data-price="22000">🛒 Cart</button><button class="whatsapp-btn" data-name="Marseille Home 26/27" data-price="22000">💬 Buy</button></div></div>
+
         </div>
     </main>
 
@@ -233,14 +265,14 @@
             <button class="close-cart" id="close-cart">&times;</button>
             <h2>Your Shopping Cart</h2>
             <div id="cart-items-container"></div>
-            
+
             <!-- PROMO CODE SECTION -->
             <div class="promo-container">
                 <input type="text" id="promo-input" class="promo-input" placeholder="Promo Code (e.g. KICKOFF10)">
                 <button id="apply-promo-btn" class="promo-btn">Apply</button>
             </div>
             <div id="discount-message" class="discount-applied">🎉 10% Discount Applied!</div>
-            
+
             <div class="cart-total">Total: <span id="cart-currency-symbol">₦</span><span id="cart-total-price">0</span></div>
             <button class="checkout-btn" id="checkout-btn">💬 Checkout on WhatsApp</button>
         </div>
@@ -269,8 +301,7 @@
         <div class="faq-item">
             <button class="faq-question">How long does delivery take? <span>+</span></button>
             <div class="faq-answer"><p>We offer nationwide delivery right to your doorstep within 2-5 business days depending on your location.</p></div>
-        </div>
-        <div class="faq-item">
+        </div><div class="faq-item">
             <button class="faq-question">Do you accept returns? <span>+</span></button>
             <div class="faq-answer"><p>Yes! If the jersey is defective or the wrong size was sent, we accept returns within 3 days of delivery.</p></div>
         </div>
@@ -292,11 +323,9 @@
             <p class="copyright">&copy; 2026 KickOff Jerseys. All rights reserved.</p>
         </div>
     </footer>
-        <script>
+    
+       <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
-            
-            
 
             // --- 2. DARK MODE LOGIC ---
             const themeToggle = document.getElementById('theme-toggle');
@@ -311,7 +340,7 @@
             // --- 3. CURRENCY CONVERTER LOGIC ---
             const currencySelector = document.getElementById('currency-selector');
             const rates = { NGN: 1, USD: 1500, GBP: 1900 }; // Exchange rates
-            const symbols = { NGN: '₦', USD: '$', GBP: '£' };
+                        const symbols = { NGN: '₦', USD: '$', GBP: '£' };
             let currentCurrency = 'NGN';
 
             function updatePrices() {
@@ -322,7 +351,7 @@
                 document.querySelectorAll('.price').forEach(el => {
                     const basePrice = parseInt(el.getAttribute('data-base-price'));
                     const converted = Math.round(basePrice / rate);
-                    
+
                     const oldPriceEl = el.querySelector('.old-price');
                     if (oldPriceEl) {
                         const baseOld = parseInt(oldPriceEl.getAttribute('data-base-old'));
@@ -343,7 +372,7 @@
                 link.addEventListener('click', () => sizeGuideModal.style.display = 'flex');
             });
             closeSizeGuide.addEventListener('click', () => sizeGuideModal.style.display = 'none');
-
+            
             // --- 5. TOAST NOTIFICATIONS ---
             function showToast(message) {
                 const container = document.getElementById('toast-container');
@@ -364,34 +393,60 @@
                 });
             });
 
-            // --- 7. SEARCH & FILTER ---
+            // --- 7. SEARCH, FILTER & SORT ---
             const searchBar = document.getElementById('search-bar');
+            const sortSelector = document.getElementById('sort-selector');
             const filterButtons = document.querySelectorAll('.filter-btn');
-            const jerseyCards = document.querySelectorAll('.jersey-card');
+            const jerseyGrid = document.getElementById('jersey-grid');
+            // Convert NodeList to Array so we can sort it
+            let jerseyCards = Array.from(document.querySelectorAll('.jersey-card')); 
+            
             function showCard(card) { if (card.style.display === 'none' || card.style.display === '') { card.style.display = 'block'; card.classList.remove('animate-in'); void card.offsetWidth; card.classList.add('animate-in'); } }
             function hideCard(card) { card.style.display = 'none'; }
-            
-            searchBar.addEventListener('input', (e) => {
-                const searchString = e.target.value.toLowerCase();
+
+            function applyFiltersAndSort() {
+                const searchString = searchBar.value.toLowerCase();
+                const activeCategory = document.querySelector('.filter-btn.active').getAttribute('data-category');
+                const sortValue = sortSelector.value;
+
+                // 1. Sort the array of cards
+                if (sortValue === 'low-high') {
+                    jerseyCards.sort((a, b) => parseInt(a.querySelector('.price').getAttribute('data-base-price')) - parseInt(b.querySelector('.price').getAttribute('data-base-price')));
+                } else if (sortValue === 'high-low') {
+                    jerseyCards.sort((a, b) => parseInt(b.querySelector('.price').getAttribute('data-base-price')) - parseInt(a.querySelector('.price').getAttribute('data-base-price')));
+                } else {
+                    // Default sort (sort alphabetically by name as a fallback)
+                    jerseyCards.sort((a, b) => a.querySelector('h2').textContent.localeCompare(b.querySelector('h2').textContent));
+                }
+
+                // 2. Re-append to grid in sorted order and apply visibility filters
                 jerseyCards.forEach(card => {
+                    jerseyGrid.appendChild(card); // This moves the element to the new sorted position in the DOM
+                    
                     const name = card.querySelector('h2').textContent.toLowerCase();
-                    if (name.includes(searchString)) showCard(card); else hideCard(card);
+                    const cardCategory = card.getAttribute('data-category');
+                    
+                    const matchesSearch = name.includes(searchString);
+                    const matchesCategory = (activeCategory === 'all' || activeCategory === cardCategory);
+                    
+                    if (matchesSearch && matchesCategory) {
+                        showCard(card);
+                    } else {
+                        hideCard(card);
+                    }
                 });
-            });
+            }
+
+            searchBar.addEventListener('input', applyFiltersAndSort);
+            sortSelector.addEventListener('change', applyFiltersAndSort);
 
             filterButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     filterButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
-                    const category = button.getAttribute('data-category');
-                    jerseyCards.forEach(card => {
-                        const cardCategory = card.getAttribute('data-category');
-                        if (category === 'all' || category === cardCategory) showCard(card); else hideCard(card);
-                    });
+                    applyFiltersAndSort();
                 });
-            });
-
-            // --- 8. CART, PROMO & WHATSAPP ---
+            });// --- 8. CART, PROMO & WHATSAPP ---
             let cart = [];
             let discount = 0;
             const cartBtn = document.getElementById('cart-btn');
@@ -452,7 +507,7 @@
                     const basePrice = parseInt(button.getAttribute('data-price'));
                     const selectedSize = card.querySelector('.size-selector').value;
                     const customName = card.querySelector('.custom-name-input').value.trim();
-                    
+
                     const rate = rates[currentCurrency];
                     const symbol = symbols[currentCurrency];
                     const convertedPrice = Math.round(basePrice / rate).toLocaleString();
@@ -476,11 +531,11 @@
                     cartTotalPrice.textContent = '0';
                     return;
                 } 
-                
+
                 cart.forEach((item, index) => {
                     subtotalBase += item.basePrice;
                     const convertedPrice = Math.round(item.basePrice / rate).toLocaleString();
-                    
+
                     const itemEl = document.createElement('div');
                     itemEl.className = 'cart-item';
                     itemEl.innerHTML = `
@@ -493,10 +548,10 @@
                     `;
                     cartItemsContainer.appendChild(itemEl);
                 });
-                
+
                 let subtotalConverted = Math.round(subtotalBase / rate);
                 let totalConverted = Math.round(subtotalConverted - (subtotalConverted * discount));
-                
+
                 if (discount > 0) {
                     cartTotalPrice.innerHTML = `<span class="original-price">${symbol}${subtotalConverted.toLocaleString()}</span> ${totalConverted.toLocaleString()}`;
                 } else {
@@ -516,8 +571,7 @@
                 const symbol = symbols[currentCurrency];
                 let message = "Hello! I would like to place an order for the following items:\n\n";
                 let subtotalBase = 0;
-
-                cart.forEach((item, index) => {
+cart.forEach((item, index) => {
                     const convertedPrice = Math.round(item.basePrice / rate).toLocaleString();
                     message += `${index + 1}. ${item.name} - Size: ${item.size} (${symbol}${convertedPrice})\n`;
                     subtotalBase += item.basePrice;
@@ -534,9 +588,12 @@
                 message += `\n*Total Price: ${symbol}${totalConverted.toLocaleString()}*\n\nIs this available?`;
                 window.location.href = `https://wa.me/${myPhoneNumber}?text=${encodeURIComponent(message)}`;
             });
-            
-            updatePrices(); // Initialize prices on load
+
+            // Initialize default sorting and prices on load
+            applyFiltersAndSort();
+            updatePrices(); 
         });
     </script>
+    
 </body>
 </html>
