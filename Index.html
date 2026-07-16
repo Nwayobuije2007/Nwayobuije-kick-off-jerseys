@@ -5387,7 +5387,53 @@ el.querySelectorAll('.jersey-card').forEach(c => {
             modal.style.display = 'none';
         }, 500);
     }
-    
+        // ==========================================
+    // BESPOKE PHONE BACK BUTTON ENGINE
+    // ==========================================
+    // 1. Set the initial state for the phone's history
+    history.replaceState({ page: 'menu' }, null, "");
+
+    // 2. Upgrade the collection buttons to register in the phone's history
+    if (typeof showSection === "function") {
+        const originalShowSection = showSection;
+        showSection = function(category) {
+            originalShowSection(category);
+            history.pushState({ page: category }, null, "#" + category);
+        };
+    }
+
+    // 3. Listen for the physical Android/iPhone Back Button
+    window.addEventListener('popstate', function(event) {
+        // A. Hide all collections
+        const allMaisonCategories = ['jerseys', 'perfumes', 'wigs', 'watches', 'shoes', 'skincare', 'jewelry', 'bags', 'loungewear', 'wardrobe'];
+        allMaisonCategories.forEach(cat => {
+            let sec = document.getElementById(cat + '-section');
+            if (sec) sec.style.display = 'none';
+        });
+
+        // B. Hide The Maison Protocol if it is open
+        let protocol = document.getElementById('protocol-modal');
+        if (protocol) {
+            protocol.style.opacity = '0';
+            setTimeout(() => protocol.style.display = 'none', 500);
+        }
+
+        // C. Show the Main Menu (Bulletproof method)
+        let menuContainer = document.getElementById('main-menu') || document.getElementById('menu');
+        if (menuContainer) {
+            menuContainer.style.display = 'block';
+        } else {
+            // Fallback: Find the menu buttons and unhide their container
+            let anyMenuButton = document.querySelector('button[onclick^="showSection"]');
+            if (anyMenuButton && anyMenuButton.parentElement) {
+                anyMenuButton.parentElement.style.display = 'block';
+            }
+        }
+        
+        // D. Scroll elegantly to the top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
         
 </script>
 
