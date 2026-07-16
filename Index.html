@@ -5387,14 +5387,17 @@ el.querySelectorAll('.jersey-card').forEach(c => {
             modal.style.display = 'none';
         }, 500);
     }
-        // ==========================================
-    // BESPOKE PHONE BACK BUTTON ENGINE
+        
+
+      // ==========================================
+    // THE SMART MEMORY NAVIGATION ENGINE
     // ==========================================
-    // 1. Set the initial state for the phone's history
+    // 1. Set initial memory to Main Menu
     history.replaceState({ page: 'menu' }, null, "");
 
-    // 2. Upgrade the collection buttons to register in the phone's history
-    if (typeof showSection === "function") {
+    // 2. Upgrade Collection Buttons to use Memory
+    if (typeof showSection === "function" && !window.navUpgraded) {
+        window.navUpgraded = true;
         const originalShowSection = showSection;
         showSection = function(category) {
             originalShowSection(category);
@@ -5402,39 +5405,57 @@ el.querySelectorAll('.jersey-card').forEach(c => {
         };
     }
 
-    // 3. Listen for the physical Android/iPhone Back Button
-    window.addEventListener('popstate', function(event) {
-        // A. Hide all collections
-        const allMaisonCategories = ['jerseys', 'perfumes', 'wigs', 'watches', 'shoes', 'skincare', 'jewelry', 'bags', 'loungewear', 'wardrobe'];
-        allMaisonCategories.forEach(cat => {
-            let sec = document.getElementById(cat + '-section');
-            if (sec) sec.style.display = 'none';
-        });
+    // 3. Open Protocol (Now registers in phone memory)
+    function openProtocol() {
+        const modal = document.getElementById('protocol-modal');
+        modal.style.display = 'block';
+        setTimeout(() => modal.style.opacity = '1', 10);
+        history.pushState({ page: 'protocol' }, null, "#protocol");
+    }
 
-        // B. Hide The Maison Protocol if it is open
+    // 4. Close Protocol (Smart Close)
+    function closeProtocol() {
+        const modal = document.getElementById('protocol-modal');
+        modal.style.opacity = '0';
+        setTimeout(() => modal.style.display = 'none', 500);
+        if (history.state && history.state.page === 'protocol') {
+            history.back(); // Tells the phone to go back one step
+        }
+    }
+
+    // 5. The Smart Phone Back Button Listener
+    window.addEventListener('popstate', function(event) {
+        const state = event.state ? event.state.page : 'menu';
+        
+        // A. Always close the Protocol screen if it's open
         let protocol = document.getElementById('protocol-modal');
-        if (protocol) {
+        if (protocol && protocol.style.display === 'block') {
             protocol.style.opacity = '0';
             setTimeout(() => protocol.style.display = 'none', 500);
         }
 
-        // C. Show the Main Menu (Bulletproof method)
-        let menuContainer = document.getElementById('main-menu') || document.getElementById('menu');
-        if (menuContainer) {
-            menuContainer.style.display = 'block';
-        } else {
-            // Fallback: Find the menu buttons and unhide their container
-            let anyMenuButton = document.querySelector('button[onclick^="showSection"]');
-            if (anyMenuButton && anyMenuButton.parentElement) {
-                anyMenuButton.parentElement.style.display = 'block';
-            }
+        let menuContainer = document.getElementById('main-menu') || document.querySelector('button[onclick^="showSection"]').parentElement;
+        const allMaisonCategories = ['jerseys', 'perfumes', 'wigs', 'watches', 'shoes', 'skincare', 'jewelry', 'bags', 'loungewear', 'wardrobe'];
+
+        if (state === 'menu') {
+            // If memory says Menu: Show Menu, Hide Collections
+            allMaisonCategories.forEach(cat => {
+                let sec = document.getElementById(cat + '-section');
+                if (sec) sec.style.display = 'none';
+            });
+            if (menuContainer) menuContainer.style.display = 'block';
+        } else if (allMaisonCategories.includes(state)) {
+            // If memory says Collection: Show Collection, Hide Menu
+            if (menuContainer) menuContainer.style.display = 'none';
+            allMaisonCategories.forEach(cat => {
+                let sec = document.getElementById(cat + '-section');
+                if (sec) sec.style.display = (cat === state) ? 'block' : 'none';
+            });
         }
         
-        // D. Scroll elegantly to the top
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-
-        
+    
 </script>
 
 </body>
